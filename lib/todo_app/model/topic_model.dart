@@ -1,8 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_final/Firebase/firebase_auth.dart';
 
-class Topic{
+class Topic {
   String? topicName, createdBy;
   Timestamp? createdAt;
 
@@ -28,7 +27,8 @@ class Topic{
     );
   }
 }
-class TopicSnapshot{
+
+class TopicSnapshot {
   Topic topic;
   DocumentReference ref;
   TopicSnapshot({
@@ -42,17 +42,26 @@ class TopicSnapshot{
       'ref': this.ref,
     };
   }
-  factory TopicSnapshot.fromMap(DocumentSnapshot docSnap){
-    return TopicSnapshot(topic: Topic.fromJson(docSnap.data() as Map<String, dynamic>), ref: docSnap.reference);
+
+  factory TopicSnapshot.fromMap(DocumentSnapshot docSnap) {
+    return TopicSnapshot(
+        topic: Topic.fromJson(docSnap.data() as Map<String, dynamic>),
+        ref: docSnap.reference);
   }
-  Future<void> xoa(){
+  Future<void> xoa() {
     return ref.delete();
   }
-  Future<void> updateTopicName(String newTopicName, DocumentReference ref) {
+
+  Future<void> updateTopicName(String newTopicName) {
     return ref.update({'topicName': newTopicName});
   }
-  static Stream<List<TopicSnapshot>> getAll(){
-    Stream<QuerySnapshot> sqs = FirebaseFirestore.instance.collection("ToDoDB").where("createdBy", isEqualTo: AuthController.userId).snapshots();
-    return sqs.map((qs) => qs.docs.map((docSnap) => TopicSnapshot.fromMap(docSnap)).toList());
+
+  static Stream<List<TopicSnapshot>> getAll() {
+    Stream<QuerySnapshot> sqs = FirebaseFirestore.instance
+        .collection("ToDoDB")
+        .where("createdBy", isEqualTo: AuthController.userId)
+        .snapshots();
+    return sqs.map((qs) =>
+        qs.docs.map((docSnap) => TopicSnapshot.fromMap(docSnap)).toList());
   }
 }

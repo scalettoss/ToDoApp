@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:project_final/Firebase/firebase_auth.dart';
 import 'package:project_final/todo_app/view/HomePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
               onPressed: () async {
                 await AuthController.signInWithGoogle();
                 if(AuthController.userName == null){
-                  showMySnackBar(context, "Opps", "Đăng nhập thất bại", ContentType.failure);
+                  showMySnackBar(context, "Ối", "Đăng nhập thất bại", ContentType.failure);
                 }
                 else {
                   showMySnackBar(context, "Xin chào ${AuthController.userName}!", "Thêm công việc mà bạn muốn hoàn thành", ContentType.success);
