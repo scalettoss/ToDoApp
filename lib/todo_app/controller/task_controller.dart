@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_final/todo_app/model/task.dart';
+import 'package:project_final/todo_app/model/task_model.dart';
+import 'package:project_final/todo_app/view/LoginPage.dart';
 
-import '../view/home_screen.dart';
 
 class TaskController extends ChangeNotifier {
   String todoName = "";
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
         },
         child: const Text("+"),
       ),

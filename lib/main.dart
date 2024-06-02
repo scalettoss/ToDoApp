@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:project_final/Firebase/widget_connect_firebase.dart';
 import 'package:project_final/todo_app/controller/task_controller.dart';
-import 'package:project_final/todo_app/view/home_screen.dart';
-import 'package:project_final/todo_app/view/newhomescreen.dart';
+
+import 'package:project_final/todo_app/view/LoginPage.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -18,14 +19,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TaskController()),
       ],
       child: MaterialApp(
-        title: 'Task Manager',
+        title: 'Home Todo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         home:MyFirebaseConnect(
             errorMessage: "Kết nối không thành công",
             connectingMessage: "Đang kết nối",
-            builder: (context) => NewHomeScreen()),
+            builder: (context) => const LoginPage()),
         debugShowCheckedModeBanner: false,
       ),
     );
