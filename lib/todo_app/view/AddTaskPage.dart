@@ -3,12 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:project_final/todo_app/model/task_model.dart';
 
 class AddTask extends StatefulWidget {
-  final String? docId;
-  AddTask({Key? key, required this.docId}) : super(key: key);
+  final String? docId, topicName;
+  AddTask({Key? key, required this.docId, required this.topicName}) : super(key: key);
 
   @override
   State<AddTask> createState() => _AddTaskState();
@@ -18,12 +19,14 @@ class _AddTaskState extends State<AddTask> {
   TextEditingController txtTaskName = TextEditingController();
   TextEditingController txtDateTimeController  = TextEditingController();
   DateTime? selectedDateTime;
+  
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Thêm nhiệm vụ"),
+        title: Text("${widget.topicName}"),
       ),
       body: Column(
         children: [
@@ -86,7 +89,6 @@ class _AddTaskState extends State<AddTask> {
                     return Align(alignment: Alignment.center,child: Text("Bạn chưa tạo công việc!"));
                   }
                   List<TaskSnapShot> list = snapshot.data!;
-
                   return ListView.builder(
                     itemCount: list.length,
                     itemBuilder: (context, index) {
@@ -132,6 +134,7 @@ class _AddTaskState extends State<AddTask> {
                 },
               )
           ),
+
           Padding(
             padding: const EdgeInsets.only(bottom: 20, right: 20),
             child: Align(
